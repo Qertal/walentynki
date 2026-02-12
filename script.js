@@ -86,6 +86,7 @@ function showTeaseMessage(msg) {
 
 function handleNoClick() {
     noClickCount++
+    updateBackgroundGrayLevel()
 
     // Cycle through guilt-trip messages
     const msgIndex = Math.min(noClickCount, noMessages.length - 1)
@@ -113,6 +114,13 @@ function handleNoClick() {
         enableRunaway()
         runawayEnabled = true
     }
+}
+
+function updateBackgroundGrayLevel() {
+    const maxOverlay = 0.68
+    const step = 0.1
+    const overlayOpacity = Math.min(noClickCount * step, maxOverlay)
+    document.documentElement.style.setProperty('--gray-overlay-opacity', overlayOpacity.toString())
 }
 
 function swapGif(src) {
